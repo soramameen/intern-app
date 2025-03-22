@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  university: MyString
+  grade: 1
+  skills: MyString
+  bio: MyText
+
+two:
+  name: MyString
+  university: MyString
+  grade: 1
+  skills: MyString
+  bio: MyText
