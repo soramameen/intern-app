@@ -1,8 +1,9 @@
 "use client";
+
 import { useState, useEffect } from "react";
 import { Intern } from "@/app/types";
 
-export default function Page() {
+export default function InternList() {
   const [internDatas, setInternDatas] = useState<Intern[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -17,8 +18,7 @@ export default function Page() {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">インターン生一覧</h1>
+    <>
       {error ? (
         <p className="text-red-500 text-center">{error}</p>
       ) : (
@@ -53,6 +53,6 @@ export default function Page() {
           </tbody>
         </table>
       )}
-    </div>
+    </>
   );
 }
