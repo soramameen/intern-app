@@ -306,6 +306,7 @@ Devise.setup do |config|
   config.responder.redirect_status = :see_other
   config.navigational_formats = [:json]
   config.navigational_formats = []
+  config.scoped_views = true # この設定があると良い（必須ではないが推奨）
 
   # ==> Configuration for :registerable
 

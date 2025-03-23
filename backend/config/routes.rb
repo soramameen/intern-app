@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :companies
   namespace :api do
     devise_for :interns, 
       controllers: { sessions: 'api/sessions',
@@ -11,6 +12,22 @@ Rails.application.routes.draw do
     end
 
     resources :interns, only: [:index, :create] do
+      get :me, on: :collection
+    end
+    # 企業ルート
+    devise_for :companies, 
+        controllers: { 
+          sessions: 'api/company_sessions',
+          registrations: 'api/company_registrations' },
+
+      defaults: { format: :json }
+
+    devise_scope :company do
+      post 'companies/sign_in', to: 'company_sessions#create'
+      delete 'companies/sign_out', to: 'company_sessions#destroy'
+      post 'companies/sign_up', to: 'company_registrations#create'
+    end
+    resources :companies, only: [] do
       get :me, on: :collection
     end
   end
