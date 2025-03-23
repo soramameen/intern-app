@@ -10,3 +10,13 @@ export interface Intern {
 export interface Interns {
   interns: Intern[];
 }
+export interface FormData {
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+  name: string;
+  university: string;
+  grade: string;
+  skills: string;
+  bio: string;
+}

@@ -58,7 +58,7 @@ export default function Home() {
                 cursor: "pointer",
               }}
             >
-              インターン一覧
+              インターン希望生一覧
             </button>
           </Link>
         </div>
