@@ -20,3 +20,10 @@ export interface FormData {
   skills: string;
   bio: string;
 }
+export interface Company {
+  id: number;
+  email: string;
+  name: string;
+  industry: string;
+  description: string;
+}
