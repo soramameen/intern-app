@@ -1,5 +1,6 @@
 export interface Intern {
   id: number;
+  email: string;
   name: string;
   university: string;
   grade: number;

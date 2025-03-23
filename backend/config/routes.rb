@@ -7,6 +7,8 @@ Rails.application.routes.draw do
         delete 'interns/sign_out', to: 'sessions#destroy'
     end
 
-    resources :interns, only: [:index, :create]
+    resources :interns, only: [:index, :create] do
+      get :me, on: :collection
+    end
   end
 end
