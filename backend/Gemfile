@@ -46,4 +46,6 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   # Next.jsからアクセスできるようにするため
   gem "rack-cors"
+  # 認証
+  gem "devise"
 end
