@@ -1,13 +1,12 @@
 class Api::SessionsController < Devise::SessionsController
-  skip_before_action :verify_authenticity_token, only: [:create, :destroy]
   respond_to :json
-
+  
   def create
     intern = Intern.find_by(email: params[:intern][:email])
 
     if intern&.valid_password?(params[:intern][:password])
-      sign_in(intern)
-      render json: { message: 'ログイン成功', intern: intern }, status: :ok
+      sign_in(:intern, intern)
+      render json: { message: 'ログイン成功', intern: intern.as_json }, status: :ok
     else
       render json: { error: 'ログインに失敗しました。メールアドレスまたはパスワードが間違っています。' }, status: :unauthorized
     end

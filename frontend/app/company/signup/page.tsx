@@ -8,7 +8,7 @@ export default function CompanySignup() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
-    passwordConfirmation: "",
+    password_confirmation: "",
     name: "",
     industry: "",
     description: "",
@@ -22,7 +22,7 @@ export default function CompanySignup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/companies/sign_up",
+        "http://localhost:3000/api/company/sign_up",
         { company: formData },
         { withCredentials: true }
       );
@@ -54,8 +54,8 @@ export default function CompanySignup() {
         />
         <input
           type="password"
-          name="passwordConfirmation"
-          value={formData.passwordConfirmation}
+          name="password_confirmation"
+          value={formData.password_confirmation}
           onChange={handleChange}
           placeholder="パスワード確認"
           style={{ display: "block", width: "100%", marginBottom: "1rem" }}

@@ -1,34 +1,40 @@
 Rails.application.routes.draw do
-  devise_for :companies
+  # API名前空間内のすべてのルート
   namespace :api do
+    # インターン用ルート
     devise_for :interns, 
-      controllers: { sessions: 'api/sessions',
-      registrations: 'api/registrations'}, # ← 登録コントローラを指定
-      skip: [:registrations, :passwords]
-    devise_scope :api_intern do
-        post 'interns/sign_up', to: 'registrations#create'
-        post 'interns/sign_in', to: 'sessions#create'
-        delete 'interns/sign_out', to: 'sessions#destroy'
-    end
-
-    resources :interns, only: [:index, :create] do
-      get :me, on: :collection
-    end
-    # 企業ルート
-    devise_for :companies, 
-        controllers: { 
-          sessions: 'api/company_sessions',
-          registrations: 'api/company_registrations' },
-
+      controllers: {
+        sessions: 'api/sessions',
+        registrations: 'api/registrations'
+      },
+      path: 'interns',
+      path_names: {
+        sign_in: 'sign_in',
+        sign_out: 'sign_out',
+        sign_up: 'sign_up'
+      },
       defaults: { format: :json }
+    
+    # インターン関連リソース
+    resources :interns, only: [:index, :create] do
+      collection do
+        get :me
+      end
+    end
 
-    devise_scope :company do
-      post 'companies/sign_in', to: 'company_sessions#create'
-      delete 'companies/sign_out', to: 'company_sessions#destroy'
-      post 'companies/sign_up', to: 'company_registrations#create'
-    end
+    # 企業用ルートはひとまず単純化
     resources :companies, only: [] do
-      get :me, on: :collection
+      collection do
+        get :me
+      end
     end
+    
+    # 明示的なルートとして追加
+    post 'companies/sign_up', to: 'company_registrations#create'
+    post 'companies/sign_in', to: 'company_sessions#create'
+    delete 'companies/sign_out', to: 'company_sessions#destroy'
   end
+
+  # ヘルスチェック用エンドポイント
+  get "/health", to: proc { [200, {}, ["OK"]] }
 end
