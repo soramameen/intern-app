@@ -1,5 +1,8 @@
 class Api::CompanyRegistrationsController < Devise::RegistrationsController
+  prepend_before_action :set_devise_mapping
+
   skip_before_action :verify_authenticity_token, only: [:create]
+
   respond_to :json
 
   def create
@@ -16,5 +19,8 @@ class Api::CompanyRegistrationsController < Devise::RegistrationsController
 
   def sign_up_params
     params.require(:company).permit(:email, :password, :password_confirmation, :name, :industry, :description)
+  end
+  def set_devise_mapping
+    request.env["devise.mapping"] = Devise.mappings[:company]
   end
 end

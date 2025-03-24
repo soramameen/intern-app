@@ -22,7 +22,7 @@ export default function CompanySignup() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/company/sign_up",
+        "http://localhost:3000/api/companies/sign_up",
         { company: formData },
         { withCredentials: true }
       );
